@@ -13,5 +13,37 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body></body>
+  <body>
+    <header class="header header__container">
+      <div class="header__flex">
+        <h1 class="header__heading">Buscador de Recetas</h1>
+        <nav class="header__nav">
+          <a class="header__anchor" href="#">Inicio</a>
+          <a class="header__anchor" href="#">Mis Recetas</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="search search__container">
+      <form class="form">
+        <label for="category" class="form__label">Categoría</label>
+        <select id="category" class="form__select">
+          <option selected>-- Seleccione --</option>
+        </select>
+      </form>
+    </section>
+
+    <main class="main main__container">
+      <h2 class="main__heading">Resultados</h2>
+      <div id="results" class="main__grid">
+        <article class="food-card">
+          <img class="food-card__image" src="image-test.jpg" alt="food image" />
+          <div class="food-card__information">
+            <h3 class="food-card__name">Nombre Comida</h3>
+            <button class="food-card__button">Ver Receta</button>
+          </div>
+        </article>
+      </div>
+    </main>
+  </body>
 </html>
