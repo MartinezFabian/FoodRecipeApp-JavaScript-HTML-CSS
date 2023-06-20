@@ -1,0 +1,39 @@
+/* variables */
+
+:root {
+  --main-font: "Lato", sans-serif;
+}
+
+/* global styles */
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--main-font);
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+[class$="__container"] {
+  max-width: 120rem;
+  width: 90%; /* cuando el ancho sea menos de 1200px va a ocupar el 90% */
+  margin: 0 auto; /* centra el contenedor */
+}
+
+[class$="__heading"] {
+  margin: 2rem 0;
+}
