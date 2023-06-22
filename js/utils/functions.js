@@ -14,11 +14,25 @@ function fetchCategories() {
       }
     })
     .then((data) => {
-      console.log(data);
+      if (data.categories.length > 0) {
+        showCategories(data.categories);
+      } else {
+        console.log("Error: no hay categorías disponibles");
+      }
     })
     .catch((error) => {
       console.log(error);
     });
+}
+
+function showCategories(categories) {
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category.strCategory;
+    option.textContent = category.strCategory;
+
+    categorySelect.appendChild(option);
+  });
 }
 
 export { fetchCategories };
