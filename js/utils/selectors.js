@@ -1,2 +1,2 @@
-const categorySelect = document.querySelector("#category");
-const results = document.querySelector("#results");
+export const categorySelect = document.querySelector("#category");
+export const results = document.querySelector("#results");
