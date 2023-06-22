@@ -4,6 +4,7 @@
   --main-font: "Lato", sans-serif;
   --black: #111;
   --white: #fff;
+  --red: #c70000;
 }
 
 /* global styles */
@@ -179,11 +180,11 @@ img {
 .button {
   margin-top: 2rem;
   width: 100%;
-  border-style: none;
   padding: 1rem;
   font-weight: 700;
   background-color: var(--white);
   border-style: solid;
+  border-color: var(--black);
   border-radius: 1rem;
 }
 .button:hover {
@@ -266,6 +267,18 @@ img {
 .modal__footer {
   display: flex;
   gap: 2rem;
+}
+
+.button--favorite {
+  background-color: var(--black);
+  color: var(--white);
+  border-style: none;
+}
+
+.button--close {
+  background-color: var(--red);
+  color: var(--white);
+  border-style: none;
 }
 
 .hidden {
