@@ -160,6 +160,7 @@ img {
 }
 
 .food-card__image {
+  object-fit: cover;
   transition: transform 0.3s ease-out;
 }
 
@@ -175,7 +176,7 @@ img {
   margin: 0;
 }
 
-.food-card__button {
+.button {
   margin-top: 2rem;
   width: 100%;
   border-style: none;
@@ -185,6 +186,88 @@ img {
   border-style: solid;
   border-radius: 1rem;
 }
-.food-card__button:hover {
+.button:hover {
   cursor: pointer;
+}
+
+/* modal */
+.modal {
+  position: fixed; /* mantener el contenedor del modal en una posición fija en la ventana */
+  top: 0; /* Desde la parte superior de la ventana */
+  left: 0; /* Desde la parte izquierda de la ventana */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__card {
+  background-color: var(--white); /* Color de fondo del modal */
+  width: 90%; /* Ancho del modal */
+  height: 90%; /* Altura del modal */
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+@media (min-width: 768px) {
+  .modal__card {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal__card {
+    width: 40%;
+    max-width: 60rem;
+  }
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.modal__title {
+  margin-bottom: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.modal__body {
+  overflow-y: scroll; /* Habilitar desplazamiento vertical en el cuerpo del modal */
+}
+
+.modal__image {
+  width: 100%;
+  max-height: 30rem;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.modal__text {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.modal__list {
+  list-style: none; /* Eliminar viñetas de la lista */
+  padding-left: 0;
+}
+
+.modal__list-item {
+  padding: 1rem;
+  border: solid 1px #e1e1e1;
+}
+
+.modal__footer {
+  display: flex;
+  gap: 2rem;
+}
+
+.hidden {
+  display: none;
 }
