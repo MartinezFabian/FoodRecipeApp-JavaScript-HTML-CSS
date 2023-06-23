@@ -1,4 +1,5 @@
 import { categorySelect } from "./selectors.js";
+import UserInterface from "../classes/UserInterface.js";
 
 function fetchCategories() {
   const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -55,7 +56,7 @@ function fetchFoodByCategory(category) {
     })
     .then((data) => {
       if (data.meals.length > 0) {
-        console.log(data.meals);
+        UserInterface.showFoodsInHTML(data.meals);
       } else {
         console.log("Error: no se encontraron comidas para la categoría seleccionada");
       }

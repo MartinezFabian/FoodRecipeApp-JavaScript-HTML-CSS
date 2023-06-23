@@ -152,6 +152,10 @@ img {
   border-radius: 1rem;
   overflow: hidden;
   margin-bottom: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media (min-width: 768px) {
@@ -163,6 +167,7 @@ img {
 .food-card__image {
   object-fit: cover;
   transition: transform 0.3s ease-out;
+  max-height: 38rem;
 }
 
 .food-card__image:hover {
