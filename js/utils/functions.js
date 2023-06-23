@@ -35,4 +35,34 @@ function showCategories(categories) {
   });
 }
 
-export { fetchCategories };
+function getSelectedCategory(e) {
+  const category = e.target.value;
+
+  fetchFoodByCategory(category);
+}
+
+function fetchFoodByCategory(category) {
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // retornar nueva promise que convierte la respuesta en un obj JavaScript
+      } else {
+        //lanzar error si la respuesta no fue exitosa
+        throw new Error(`Error: ${response.statusText}`);
+      }
+    })
+    .then((data) => {
+      if (data.meals.length > 0) {
+        console.log(data.meals);
+      } else {
+        console.log("Error: no se encontraron comidas para la categoría seleccionada");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export { fetchCategories, getSelectedCategory };
