@@ -1,4 +1,5 @@
 import { results } from "../utils/selectors.js";
+import { fetchRecipeByID } from "../utils/functions.js";
 
 class UserInterface {
   static showFoodsInHTML(foods) {
@@ -32,6 +33,9 @@ class UserInterface {
       const btn = document.createElement("button");
       btn.classList.add("button");
       btn.textContent = "Ver Receta";
+      btn.onclick = function () {
+        fetchRecipeByID(id);
+      };
 
       cardInformation.appendChild(btn);
 
@@ -45,6 +49,10 @@ class UserInterface {
       //eliminar el primer hijo del elemento
       element.removeChild(element.firstChild);
     }
+  }
+
+  static showModal(recipe) {
+    console.log(recipe);
   }
 }
 

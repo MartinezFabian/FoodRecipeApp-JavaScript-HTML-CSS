@@ -66,4 +66,29 @@ function fetchFoodByCategory(category) {
     });
 }
 
-export { fetchCategories, getSelectedCategory };
+function fetchRecipeByID(id) {
+  const url = `https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        // retornar nueva promise que convierte la respuesta en un obj JavaScript
+        return response.json();
+      } else {
+        //lanzar error si la respuesta no fue exitosa
+        throw new Error(`Error: ${response.statusText}`);
+      }
+    })
+    .then((data) => {
+      if (data.meals.length > 0) {
+        UserInterface.showModal(data.meals[0]);
+      } else {
+        console.log("No hay receta para la comida seleccionada");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export { fetchCategories, getSelectedCategory, fetchRecipeByID };
