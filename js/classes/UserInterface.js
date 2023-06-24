@@ -1,4 +1,4 @@
-import { results } from "../utils/selectors.js";
+import { results, containerModal } from "../utils/selectors.js";
 import { fetchRecipeByID } from "../utils/functions.js";
 
 class UserInterface {
@@ -52,7 +52,58 @@ class UserInterface {
   }
 
   static showModal(recipe) {
-    console.log(recipe);
+    const { strMeal: name, strMealThumb: urlImg, strInstructions: text } = recipe;
+
+    containerModal.innerHTML = `
+      <div class="modal" id="modal">
+        <div class="modal__card">
+          <div class="modal__content">
+            <header class="modal__header">
+              <h2 class="modal__title">${name}</h2>
+            </header>
+            <main class="modal__body">
+              <img class="modal__image" src="${urlImg}" alt="${name} image" />
+              <h3 class="modal__title">Instrucciones</h3>
+              <p class="modal__text">${text}</p>
+              <h3 class="modal__title">Ingredientes y Cantidades</h3>
+              <ul id="modal-list" class="modal__list"></ul>
+            </main>
+            <footer id="modal-footer" class="modal__footer"></footer>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const modalList = containerModal.querySelector("#modal-list");
+
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = recipe[`strIngredient${i}`];
+      const measure = recipe[`strMeasure${i}`];
+
+      if (ingredient && measure) {
+        const li = document.createElement("li");
+        li.classList.add("modal__list-item");
+        li.textContent = `${ingredient} - ${measure}`;
+
+        modalList.appendChild(li);
+      }
+    }
+
+    const modalFooter = containerModal.querySelector("#modal-footer");
+
+    const buttonAddFavorite = document.createElement("button");
+    buttonAddFavorite.textContent = "Agregar a Favoritos";
+    buttonAddFavorite.classList.add("button", "button--favorite");
+
+    const buttonClose = document.createElement("button");
+    buttonClose.classList.add("button", "button--close");
+    buttonClose.textContent = "Cerrar";
+    buttonClose.onclick = function () {
+      UserInterface.clearHTML(containerModal);
+    };
+
+    modalFooter.appendChild(buttonAddFavorite);
+    modalFooter.appendChild(buttonClose);
   }
 }
 
