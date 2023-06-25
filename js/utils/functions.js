@@ -102,6 +102,17 @@ function addToFavorites(food) {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
+function removeFromFavorites(id) {
+  // obtener los favoritos guardados en localStorage o si es null inicializar un array vacío
+  const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
+
+  // filtrar el array favorites excluyendo el elemento con el ID proporcionado
+  const updatedFavorites = favorites.filter((food) => food.id !== id);
+
+  // agregar favorites sin el elemento eliminado a localStorage
+  localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+}
+
 function existsInFavorites(id) {
   // obtener los favoritos guardados en localStorage o si es null inicializar un array vacío
   const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
@@ -110,4 +121,11 @@ function existsInFavorites(id) {
   return favorites.some((element) => element.id === id);
 }
 
-export { fetchCategories, getSelectedCategory, fetchRecipeByID, addToFavorites, existsInFavorites };
+export {
+  fetchCategories,
+  getSelectedCategory,
+  fetchRecipeByID,
+  addToFavorites,
+  removeFromFavorites,
+  existsInFavorites,
+};
