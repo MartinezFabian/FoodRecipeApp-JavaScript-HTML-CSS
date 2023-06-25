@@ -1,5 +1,5 @@
 import { results, containerModal } from "../utils/selectors.js";
-import { fetchRecipeByID } from "../utils/functions.js";
+import { fetchRecipeByID, addToFavorites } from "../utils/functions.js";
 
 class UserInterface {
   static showFoodsInHTML(foods) {
@@ -52,7 +52,13 @@ class UserInterface {
   }
 
   static showModal(recipe) {
-    const { strMeal: name, strMealThumb: urlImg, strInstructions: text } = recipe;
+    const {
+      idMeal,
+      strMeal: name,
+      strMealThumb: urlImg,
+      strInstructions: text,
+      strYoutube,
+    } = recipe;
 
     containerModal.innerHTML = `
       <div class="modal" id="modal">
@@ -67,6 +73,8 @@ class UserInterface {
               <p class="modal__text">${text}</p>
               <h3 class="modal__title">Ingredientes y Cantidades</h3>
               <ul id="modal-list" class="modal__list"></ul>
+              <h3 class="modal__title">Video</h3>
+              <a href="${strYoutube}" target="_blank">¡Ve el video en YouTube!</a>
             </main>
             <footer id="modal-footer" class="modal__footer"></footer>
           </div>
@@ -94,6 +102,13 @@ class UserInterface {
     const buttonAddFavorite = document.createElement("button");
     buttonAddFavorite.textContent = "Agregar a Favoritos";
     buttonAddFavorite.classList.add("button", "button--favorite");
+    buttonAddFavorite.onclick = function () {
+      addToFavorites({
+        id: idMeal,
+        name: name,
+        urlImg: urlImg,
+      });
+    };
 
     const buttonClose = document.createElement("button");
     buttonClose.classList.add("button", "button--close");

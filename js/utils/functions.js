@@ -91,4 +91,8 @@ function fetchRecipeByID(id) {
     });
 }
 
-export { fetchCategories, getSelectedCategory, fetchRecipeByID };
+function addToFavorites(food) {
+  console.log(food);
+}
+
+export { fetchCategories, getSelectedCategory, fetchRecipeByID, addToFavorites };
