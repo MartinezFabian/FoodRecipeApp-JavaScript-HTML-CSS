@@ -5,6 +5,7 @@
   --black: #111;
   --white: #fff;
   --red: #c70000;
+  --green: #1ab71a;
 }
 
 /* global styles */
@@ -90,7 +91,6 @@ img {
 /* search */
 .search {
   margin-top: 6rem;
-  margin-bottom: 8rem;
 }
 
 @media (min-width: 768px) {
@@ -135,6 +135,7 @@ img {
 
 .main__heading {
   text-align: center;
+  margin-top: 8rem;
   margin-bottom: 6rem;
 }
 
@@ -284,6 +285,23 @@ img {
   background-color: var(--red);
   color: var(--white);
   border-style: none;
+}
+
+.alert {
+  margin-top: 1rem;
+  color: var(--white);
+  text-align: center;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+}
+
+.alert--success {
+  background-color: var(--green);
+}
+
+.alert--remove {
+  background-color: var(--red);
 }
 
 .hidden {

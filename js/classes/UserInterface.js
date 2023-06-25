@@ -1,9 +1,10 @@
-import { results, containerModal } from "../utils/selectors.js";
+import { results, containerModal, favorites, favoritesHeading } from "../utils/selectors.js";
 import {
   fetchRecipeByID,
   addToFavorites,
   removeFromFavorites,
   existsInFavorites,
+  getFavorites,
 } from "../utils/functions.js";
 
 class UserInterface {
@@ -116,13 +117,26 @@ class UserInterface {
     buttonAddFavorite.onclick = function () {
       if (existsInFavorites(idMeal)) {
         removeFromFavorites(idMeal);
+        UserInterface.showAlert("Receta eliminada de favoritos", "remove");
         buttonAddFavorite.textContent = "Agregar a Favoritos";
+
+        // si estamos en favorites.html donde existe favorites
+        if (favorites) {
+          getFavorites();
+        }
       } else {
         addToFavorites({
-          id: idMeal,
-          name: name,
-          urlImg: urlImg,
+          idMeal: idMeal,
+          strMeal: name,
+          strMealThumb: urlImg,
         });
+
+        // si estamos en favorites.html donde existe favorites
+        if (favorites) {
+          getFavorites();
+        }
+
+        UserInterface.showAlert("¡Receta agregada a favoritos!", "success");
 
         buttonAddFavorite.textContent = "Eliminar de Favoritos";
       }
@@ -137,6 +151,36 @@ class UserInterface {
 
     modalFooter.appendChild(buttonAddFavorite);
     modalFooter.appendChild(buttonClose);
+  }
+
+  static showAlert(message, type) {
+    const exist = document.querySelector(".alert");
+
+    if (exist) return;
+
+    const alert = document.createElement("div");
+    alert.textContent = message;
+    alert.classList.add("alert");
+
+    if (type === "success") {
+      alert.classList.add("alert--success");
+    } else if (type === "remove") {
+      alert.classList.add("alert--remove");
+    }
+
+    const container = document.querySelector(".modal__header");
+    container.appendChild(alert);
+
+    setTimeout(() => {
+      alert.remove();
+    }, 2000);
+  }
+
+  static setFavoriteHeadingInitialText() {
+    // limpiar el HTML previo dentro de results
+    UserInterface.clearHTML(results);
+
+    favoritesHeading.textContent = "Las recetas que agregues a favoritos las veras aquí";
   }
 }
 

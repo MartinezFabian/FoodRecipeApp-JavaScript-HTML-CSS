@@ -1,4 +1,4 @@
-import { categorySelect } from "./selectors.js";
+import { categorySelect, favoritesHeading } from "./selectors.js";
 import UserInterface from "../classes/UserInterface.js";
 
 function fetchCategories() {
@@ -107,7 +107,7 @@ function removeFromFavorites(id) {
   const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
 
   // filtrar el array favorites excluyendo el elemento con el ID proporcionado
-  const updatedFavorites = favorites.filter((food) => food.id !== id);
+  const updatedFavorites = favorites.filter((food) => food.idMeal !== id);
 
   // agregar favorites sin el elemento eliminado a localStorage
   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -118,7 +118,18 @@ function existsInFavorites(id) {
   const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
 
   // comprobar si la comida ya existe en favorites
-  return favorites.some((element) => element.id === id);
+  return favorites.some((element) => element.idMeal === id);
+}
+
+function getFavorites() {
+  // obtener los favoritos guardados en localStorage o si es null inicializar un array vacío
+  const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
+
+  if (favorites.length > 0) {
+    UserInterface.showFoodsInHTML(favorites);
+  } else {
+    UserInterface.setFavoriteHeadingInitialText();
+  }
 }
 
 export {
@@ -128,4 +139,5 @@ export {
   addToFavorites,
   removeFromFavorites,
   existsInFavorites,
+  getFavorites,
 };
