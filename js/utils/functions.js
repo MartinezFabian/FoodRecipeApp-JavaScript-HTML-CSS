@@ -92,7 +92,22 @@ function fetchRecipeByID(id) {
 }
 
 function addToFavorites(food) {
-  console.log(food);
+  // obtener los favoritos guardados en localStorage o si es null inicializar un array vacío
+  const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
+
+  // agregar la nueva comida
+  favorites.push(food);
+
+  // volver a agregar favorites a localStorage
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
-export { fetchCategories, getSelectedCategory, fetchRecipeByID, addToFavorites };
+function existsInFavorites(id) {
+  // obtener los favoritos guardados en localStorage o si es null inicializar un array vacío
+  const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
+
+  // comprobar si la comida ya existe en favorites
+  return favorites.some((element) => element.id === id);
+}
+
+export { fetchCategories, getSelectedCategory, fetchRecipeByID, addToFavorites, existsInFavorites };

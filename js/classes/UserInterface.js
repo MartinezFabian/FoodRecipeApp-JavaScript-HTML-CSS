@@ -1,5 +1,5 @@
 import { results, containerModal } from "../utils/selectors.js";
-import { fetchRecipeByID, addToFavorites } from "../utils/functions.js";
+import { fetchRecipeByID, addToFavorites, existsInFavorites } from "../utils/functions.js";
 
 class UserInterface {
   static showFoodsInHTML(foods) {
@@ -100,14 +100,26 @@ class UserInterface {
     const modalFooter = containerModal.querySelector("#modal-footer");
 
     const buttonAddFavorite = document.createElement("button");
-    buttonAddFavorite.textContent = "Agregar a Favoritos";
+
+    if (existsInFavorites(idMeal)) {
+      buttonAddFavorite.textContent = "Eliminar de Favoritos";
+    } else {
+      buttonAddFavorite.textContent = "Agregar a Favoritos";
+    }
+
     buttonAddFavorite.classList.add("button", "button--favorite");
     buttonAddFavorite.onclick = function () {
-      addToFavorites({
-        id: idMeal,
-        name: name,
-        urlImg: urlImg,
-      });
+      if (existsInFavorites(idMeal)) {
+        console.log("Eliminar de favoritos...");
+        buttonAddFavorite.textContent = "Agregar a Favoritos";
+      } else {
+        addToFavorites({
+          id: idMeal,
+          name: name,
+          urlImg: urlImg,
+        });
+        buttonAddFavorite.textContent = "Eliminar de Favoritos";
+      }
     };
 
     const buttonClose = document.createElement("button");
