@@ -31,4 +31,4 @@ The main goal of this project is to apply knowledge of Promises and the Fetch AP
 
 ## Online Demo
 
-An online demo of the FoodRecipeApp can be accessed at [Demo Link](...).
+An online demo of the FoodRecipeApp can be accessed at [Demo Link](https://martinezfabian.github.io/FoodRecipeApp-JavaScript-HTML-CSS/).
